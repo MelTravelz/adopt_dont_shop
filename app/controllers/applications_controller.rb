@@ -23,6 +23,15 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # def update
+  #   @application = Application.find(params[:id])
+  #   require 'pry'; binding.pry
+  #   if params[:sort] == 'add_pet'
+  #     @applicaton.update(app_params)
+  #     redirect_to "/applications/#{@application.id}"
+  #   end 
+  # end
+
 
   private
   

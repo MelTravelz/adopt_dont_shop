@@ -14,13 +14,13 @@
   <p><%= form.label :find_pet, "Seach by pet name:" %><br></p>
   <p><%= form.text_field :find_pet %>
   <%= form.submit "Submit" %></p>
+  <br>
 <% end %>
-
 <% @find_pet.each do |pet| %>
-  <br>
-  <%= pet.name %> 
-  <br>
+  <div id = "adoption-<%= pet.id %>">
+    <%= pet.name %><%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets", params:{pet_id: pet.id} %>
+    <br>
+  </div>
 <% end %>
-
 
 
