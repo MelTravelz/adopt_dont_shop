@@ -59,5 +59,17 @@ RSpec.describe "Applications" do
         expect(page).to have_content("Maxamus")
       end 
     end
+
+    describe "User story 9 / as a user " do 
+      it " I see my pet search is case insensitive" do
+        visit "/applications/#{@app_1.id}"
+                
+        fill_in("Seach by pet name:", with: "pAmuK")
+        click_button("Submit")
+
+        expect(current_path).to eq("/applications/#{@app_1.id}")
+        expect(page).to have_content("Pamuk")
+      end 
+    end
   end 
 end
