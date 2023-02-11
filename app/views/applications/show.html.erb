@@ -1,4 +1,5 @@
 <h1>Application Info </h1>
+<p> Status: <%=@application.status%></p>
 <p> Applicant Name: <%=@application.name%></p>
 <p> Address: <%=@application.street_address%>, <%=@application.city%>, <%=@application.state%>, <%=@application.zip%></p>
 <p> Description: <%=@application.description%></p>
@@ -7,7 +8,19 @@
   <%= link_to pet.name, "/pets/#{pet.id}" %>                      
 <%end%>
 </p>
-<p> Status: <%=@application.status%></p>
+<br>
+<h2> Add a Pet to this Application </h2>
+<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form|  %>
+  <p><%= form.label :find_pet, "Seach by pet name:" %><br></p>
+  <p><%= form.text_field :find_pet %>
+  <%= form.submit "Submit" %></p>
+<% end %>
+
+<% @find_pet.each do |pet| %>
+  <br>
+  <%= pet.name %> 
+  <br>
+<% end %>
 
 
 
