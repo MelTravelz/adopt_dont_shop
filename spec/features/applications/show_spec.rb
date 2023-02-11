@@ -47,6 +47,24 @@ RSpec.describe "Applications" do
       end
     end 
 
+    describe "User story 5 / as a user " do 
+      it " I see any pet whose name PARTIALLY matches my search " do
+        visit "/applications/#{@app_1.id}"
+
+        fill_in("Seach by pet name:", with: "Max")
+        click_button("Submit")
+        
+        within("#adoption-#{@pet_1.id}") do
+          expect(page).to have_button("Adopt this Pet")
+          click_button("Adopt this Pet")
+        end 
+
+        expect(current_path).to eq("/applications/#{@app_1.id}")
+        expect(page).to have_content("Pet Name: Max")
+
+      end 
+    end
+
     describe "User story 8 / as a user " do 
       it " I see any pet whose name PARTIALLY matches my search " do
         visit "/applications/#{@app_1.id}"
@@ -71,5 +89,6 @@ RSpec.describe "Applications" do
         expect(page).to have_content("Pamuk")
       end 
     end
+
   end 
 end
