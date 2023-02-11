@@ -4,7 +4,7 @@
   <h2> <%= flash[:messages] %></h2>
 <% end %>
 
-<%= form_with url: '/applications/:id', method: :post, local: true do |form|  %>
+<%= form_with url: '/applications', method: :post, local: true do |form|  %>
   <p><%= form.label :name, "Name" %><br></p>
   <p><%= form.text_field :name %></p>
   <p><%= form.label :street_address, "Street Address" %><br></p>
