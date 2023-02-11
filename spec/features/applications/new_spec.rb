@@ -7,7 +7,7 @@ RSpec.describe 'the new application form' do
       it "can post a new applicaiton" do
         visit 'applications/new'
 
-        fill_in("Name", with: "Diana")
+        fill_in("Name", with: "Diana Doolittle")
         fill_in("Street Address", with: "123 My Street")
         fill_in("City", with: "Buena Vista")
         fill_in("State", with: "CO")
@@ -17,7 +17,7 @@ RSpec.describe 'the new application form' do
         click_button("Submit")
 
         expect(current_path).to eq("/applications/#{Application.last.id}")
-        expect(page).to have_content("Diana")
+        expect(page).to have_content("Diana Doolittle")
         expect(page).to have_content("123 My Street")
         expect(page).to have_content("Buena Vista")
         expect(page).to have_content("CO")
@@ -27,7 +27,7 @@ RSpec.describe 'the new application form' do
       end
     end
 
-    describe "User Story 3 / As a user " do
+    describe "user story 3 / as a user " do
       it "can NOT post a new applicaiton without a name" do
         visit 'applications/new'
 
@@ -43,7 +43,6 @@ RSpec.describe 'the new application form' do
         expect(page).to have_content("Name can't be blank")
       end
     end
-
   end
 end
 

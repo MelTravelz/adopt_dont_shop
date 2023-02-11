@@ -14,19 +14,27 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of :description }
   end
 
-  describe "User Story 1" do 
-    it "status is set to In Progress by default and can change" do 
-      app_1 = Application.create!(name: "joe", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "This is a description", status: 0)
-      expect(app_1.status).to eq("In Progress")
+  before(:each) do
+    # @shelter_1 = Shelter.create(name: 'Petz R Us', city: 'Denver, CO', foster_program: false, rank: 9)
+    # @pet_1 = @shelter_1.pets.create!(name: 'Max', breed: 'goldendoodle', age: 2, adoptable: true)
+    # @pet_2 = @shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+    # @pet_3 = @shelter_1.pets.create!(name: 'Pamuk', breed: 'english springer spaniel', age: 3, adoptable: false)
 
-      app_1.status = 1
-      expect(app_1.status).to eq("Pending")
+    @app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 0)
+  end
+
+  describe "user story 1" do 
+    it "status is set to In Progress by default and can change" do 
+      expect(@app_1.status).to eq("In Progress")
+
+      @app_1.status = 1
+      expect(@app_1.status).to eq("Pending")
     
-      app_1.status = 2
-      expect(app_1.status).to eq("Accepted")
+      @app_1.status = 2
+      expect(@app_1.status).to eq("Accepted")
        
-      app_1.status = 3
-      expect(app_1.status).to eq("Rejected")
+      @app_1.status = 3
+      expect(@app_1.status).to eq("Rejected")
     end
   end
 end
