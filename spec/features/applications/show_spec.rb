@@ -7,6 +7,7 @@ RSpec.describe "Applications" do
       @pet_1 = @shelter_1.pets.create!(name: 'Max', breed: 'goldendoodle', age: 2, adoptable: true)
       @pet_2 = @shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
       @pet_3 = @shelter_1.pets.create!(name: 'Pamuk', breed: 'english springer spaniel', age: 3, adoptable: false)
+      @pet_4 = @shelter_1.pets.create!(name: 'Maxamus', breed: 'mini-goldendoodle', age: 1, adoptable: true)
       @app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 0)
       ApplicationPet.create!(application: @app_1, pet: @pet_1)
     end
@@ -45,5 +46,18 @@ RSpec.describe "Applications" do
 
       end
     end 
+
+    describe "User story 8 / as a user " do 
+      it " I see any pet whose name PARTIALLY matches my search " do
+        visit "/applications/#{@app_1.id}"
+                
+        fill_in("Seach by pet name:", with: "Ma")
+        click_button("Submit")
+
+        expect(current_path).to eq("/applications/#{@app_1.id}")
+        expect(page).to have_content("Max")
+        expect(page).to have_content("Maxamus")
+      end 
+    end
   end 
 end
