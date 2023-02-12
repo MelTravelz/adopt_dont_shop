@@ -32,13 +32,13 @@ RSpec.describe Pet, type: :model do
       end
     end
 
-    describe " User story 4" do
-      describe "::find_pet" do
-        it "can find pet name matching user input" do
-          expect(Pet.find_pet("Mr. Pirate")).to eq([@pet_1])
-        end
-      end
-    end
+    # describe "user story 4" do
+    #   describe "::find_pet" do
+    #     it "can find pet name matching user input" do
+    #       expect(Pet.find_pet("Mr. Pirate")).to eq([@pet_1])
+    #     end
+    #   end
+    # end
 
   end
 
