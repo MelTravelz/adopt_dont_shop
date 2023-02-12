@@ -38,21 +38,20 @@ RSpec.describe "Applications" do
         
         expect(page).to have_content("Add a Pet to this Application")
         
-        fill_in("Seach by pet name:", with: "Max")
-        click_button("Submit")
+        fill_in("Search by pet name:", with: "Max")
+        click_button("Search")
 
         expect(current_path).to eq("/applications/#{@app_1.id}")
         expect(page).to have_content("Max")
-
       end
     end 
 
-    describe "User story 5 / as a user " do 
-      it " I see any pet whose name PARTIALLY matches my search " do
+    describe "user story 5 / as a user " do 
+      it "I see any pet whose name PARTIALLY matches my search " do
         visit "/applications/#{@app_1.id}"
 
-        fill_in("Seach by pet name:", with: "Max")
-        click_button("Submit")
+        fill_in("Search by pet name:", with: "Max")
+        click_button("Search")
         
         within("#adoption-#{@pet_1.id}") do
           expect(page).to have_button("Adopt this Pet")
@@ -65,12 +64,47 @@ RSpec.describe "Applications" do
       end 
     end
 
+    describe "user story 6 / as a user " do 
+      it "after I add 1+ pets, I see a button to submit the application" do
+        visit "/applications/#{@app_1.id}"
+
+        fill_in("Search by pet name:", with: "Max")
+        click_button("Search")
+
+        # expect(page).to_not have_button("Submit Adoption Application")
+
+        within("#adoption-#{@pet_4.id}") do
+          click_button("Adopt this Pet")
+        end 
+
+        expect(current_path).to eq("/applications/#{@app_1.id}")
+        expect(page).to have_button("Submit Adoption Application")
+      end
+
+      it "after I click the submit app button, I see status pending, pets I want to adopt, and NOT the add pet section or submit button" do
+        visit "/applications/#{@app_1.id}"
+
+        fill_in("Search by pet name:", with: "Max")
+        click_button("Search")
+        
+        within("#adoption-#{@pet_1.id}") do
+          expect(page).to have_button("Adopt this Pet")
+          click_button("Adopt this Pet")
+        end 
+
+        click_button("Submit Adoption Application")
+        expect(current_path).to eq("/applications/#{@app_1.id}")
+
+        expect(page).to have_content("Pending")
+      end
+    end
+
     describe "User story 8 / as a user " do 
       it " I see any pet whose name PARTIALLY matches my search " do
         visit "/applications/#{@app_1.id}"
                 
-        fill_in("Seach by pet name:", with: "Ma")
-        click_button("Submit")
+        fill_in("Search by pet name:", with: "Ma")
+        click_button("Search")
 
         expect(current_path).to eq("/applications/#{@app_1.id}")
         expect(page).to have_content("Max")
@@ -82,13 +116,12 @@ RSpec.describe "Applications" do
       it " I see my pet search is case insensitive" do
         visit "/applications/#{@app_1.id}"
                 
-        fill_in("Seach by pet name:", with: "pAmuK")
-        click_button("Submit")
+        fill_in("Search by pet name:", with: "pAmuK")
+        click_button("Search")
 
         expect(current_path).to eq("/applications/#{@app_1.id}")
         expect(page).to have_content("Pamuk")
       end 
     end
-
   end 
 end
