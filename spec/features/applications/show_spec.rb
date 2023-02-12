@@ -71,8 +71,6 @@ RSpec.describe "Applications" do
         fill_in("Search by pet name:", with: "Max")
         click_button("Search")
 
-        # expect(page).to_not have_button("Submit Adoption Application")
-
         within("#adoption-#{@pet_4.id}") do
           click_button("Adopt this Pet")
         end 
@@ -96,6 +94,14 @@ RSpec.describe "Applications" do
         expect(current_path).to eq("/applications/#{@app_1.id}")
 
         expect(page).to have_content("Pending")
+      end
+    end
+
+    describe "user story 7 / as a user " do 
+      it "before I add 1+ pets, I do not see a button to submit the application" do
+        visit "/applications/#{@app_1.id}"
+
+        expect(page).to_not have_button("Submit Adoption Application", visible: :hidden)
       end
     end
 
