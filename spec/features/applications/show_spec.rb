@@ -47,7 +47,7 @@ RSpec.describe "Applications" do
     end 
 
     describe "user story 5 / as a user " do 
-      it "I see any pet whose name PARTIALLY matches my search " do
+      it "after I search for a pet I see a button to adopt the pet & after I see that pet listed in the application " do
         visit "/applications/#{@app_1.id}"
 
         fill_in("Search by pet name:", with: "Max")
