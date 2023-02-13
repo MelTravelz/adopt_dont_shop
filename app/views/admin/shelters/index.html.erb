@@ -5,3 +5,22 @@
   <br>
 <% end %>
 
+<h2>Shelters with Pending Applications</h2>
+<% @pets.applications.each do |application| %>
+if applicaiton.status == "pending"
+
+  
+
+
+<% @shelters.each do |shelter| %>
+shelter.name
+
+Shelter.select(:name).where()
+
+shelter
+.pets
+pet -> 
+.applications
+application_id.status
+
+Shelter.joins(:application).where("application.status = Pending").distinct.pluck(:name)
