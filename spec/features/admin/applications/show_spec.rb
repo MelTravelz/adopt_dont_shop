@@ -21,18 +21,34 @@ RSpec.describe "Admin/applications show Page" do
 
     it "user story 12 / approving a pet for adoption" do
       visit "/admin/applications/#{@app_1.id}"
-      save_and_open_page
+
       within "#pet_block-#{@pet_1.id}" do
         expect(page).to have_button("Approve")
         click_button "Approve"
       end
+      
       expect(current_path).to eq("/admin/applications/#{@app_1.id}")
       
       within "#pet_block-#{@pet_1.id}" do
         expect(page).to_not have_button("Approve", visible: :hidden)
         expect(page).to have_content("Pet has been Approved")
       end
-
     end
+
+    it "user story 13 / rejecting a pet for adoption" do
+      visit "/admin/applications/#{@app_1.id}"
+
+      within "#pet_block-#{@pet_1.id}" do
+        expect(page).to have_button("Reject")
+        click_button "Reject"
+      end
+
+      expect(current_path).to eq("/admin/applications/#{@app_1.id}")
+      
+      within "#pet_block-#{@pet_1.id}" do
+        expect(page).to_not have_button("Reject", visible: :hidden)
+        expect(page).to have_content("Pet has not been Approved")
+      end
+    end 
   end 
 end 
