@@ -1,26 +1,14 @@
 <h1>Admin Shelters Index Page</h1>
 
-<% @shelters.each do |shelter| %>
+<% @shelters_rev_alpha.each do |shelter| %>
   <%= shelter.name %>
   <br>
 <% end %>
 
 <h2>Shelters with Pending Applications</h2>
-<% @pets.applications.each do |application| %>
-if applicaiton.status == "pending"
-
+<div id = "shelters_with_pending_apps">
+  <% @shelters_filtered_by_pending.each do |name| %>
+    <p>-<%= name %></p>
+  <% end %>
+</div>
   
-
-
-<% @shelters.each do |shelter| %>
-shelter.name
-
-Shelter.select(:name).where()
-
-shelter
-.pets
-pet -> 
-.applications
-application_id.status
-
-Shelter.joins(:application).where("application.status = Pending").distinct.pluck(:name)

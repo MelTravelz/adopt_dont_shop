@@ -36,7 +36,7 @@ class Shelter < ApplicationRecord
   end
 
   def self.reverse_alpha
-    find_by_sql("SELECT * FROM shelters ORDER BY shelters.name DESC")
+    find_by_sql("SELECT DISTINCT * FROM shelters ORDER BY shelters.name DESC")
   end
 
   def self.shelter_names_by_pending_apps
