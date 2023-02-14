@@ -1,7 +1,14 @@
 <h1>Admin Shelters Index Page</h1>
 
-<% @shelters.each do |shelter| %>
+<% @shelters_rev_alpha.each do |shelter| %>
   <%= shelter.name %>
   <br>
 <% end %>
 
+<h2>Shelters with Pending Applications</h2>
+<div id = "shelters_with_pending_apps">
+  <% @shelters_filtered_by_pending.each do |name| %>
+    <p>-<%= name %></p>
+  <% end %>
+</div>
+  

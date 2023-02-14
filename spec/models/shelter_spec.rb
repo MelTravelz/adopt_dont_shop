@@ -47,6 +47,15 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.reverse_alpha).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
+
+    describe 'user story 11 / ::shelter_names_by_pending_apps' do
+      it 'returns shelter names if the shelter has pending applications' do
+        app_1 = Application.create(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 1)
+        ApplicationPet.create(application: app_1, pet: @pet_1)
+  
+        expect(Shelter.shelter_names_by_pending_apps).to eq(['Aurora shelter'])
+      end
+    end
   end
 
   describe 'instance methods' do
