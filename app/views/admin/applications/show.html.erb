@@ -1,12 +1,17 @@
 <h1>Admin Application Page</h1>
 
 
-<% @pets.each do |pet|%>
-  <div id = "pet_block-<%=pet.id%>"> 
+<% @pets.each do |pet| %>
+  <div id = "pet_block-<%=pet.id %>"> 
   <% if @application.status == "Pending" %> 
-    <%= pet.name %><%= button_to  "Approve", "/admin/applications/#{@application.id}", method: :patch, params:{status: 2} %>  
-    <br> 
-  <%else%><p>Pet has been Approved</p> 
+  <p><%= pet.name %><%= button_to  "Approve", "/admin/applications/#{@application.id}", method: :patch, params:{status: 2} %>  
+  <br>
+  <%= button_to  "Reject", "/admin/applications/#{@application.id}", method: :patch, params:{status: 3} %></p>
+  <br> 
+  <% elsif @application.status == "Accepted" %>
+  <p>Pet has been Approved</p> 
+  <% else %>
+  <p>Pet has not been Approved</p>
   <% end %>
   </div>
 <% end %>
