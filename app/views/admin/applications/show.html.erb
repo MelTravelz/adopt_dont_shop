@@ -4,16 +4,12 @@
 <% @pets.each do |pet| %>
   <div id = "pet_block-<%= pet.id %>"> 
   <% if pet.app_pet_status(@application.id) == "Waiting" %>
-  
-  <p><%= pet.name %><%= button_to  "Approve this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, approved: yea} %>  
+  <p><%= pet.name %><%= button_to  "Approve this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, approved: "yea"} %>  
   <br>
-  
   <%= button_to  "Deny this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id} %></p>
   <br> 
-  
   <% elsif pet.app_pet_status(@application.id) == "Approved" %> 
   <p>Pet has been Approved for this Application</p> 
-  
   <% else  pet.app_pet_status(@application.id) == "Denied" %>
   <p>Pet has been Denied for this Application</p>
   <% end %>

@@ -1,7 +1,8 @@
 class Veterinarian < ApplicationRecord
+  belongs_to :veterinary_office
+  
   validates :name, presence: true
   validates :review_rating, presence: true, numericality: true
-  belongs_to :veterinary_office
 
   def office_name
     veterinary_office.name
