@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Pet, type: :model do
   describe 'relationships' do
     it { should belong_to(:shelter) }
+    it { should have_many(:application_pets) }
     it { should have_many(:applications).through(:application_pets) }
   end
 
@@ -46,6 +47,15 @@ RSpec.describe Pet, type: :model do
     describe '#shelter_name' do
       it 'returns the shelter name for the given pet' do
         expect(@pet_3.shelter_name).to eq(@shelter_1.name)
+      end
+    end
+
+    describe '#app_pet_status(app_id)' do
+      it "returns status of pet_status=1 for a specific application_pet record" do
+        app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog")
+        app_pet = ApplicationPet.create!(application: app_1, pet: @pet_2, pet_status: 2)
+
+        expect(@pet_2.app_pet_status(app_1.id)).to eq("Denied")
       end
     end
   end

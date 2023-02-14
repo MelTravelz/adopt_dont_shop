@@ -19,35 +19,35 @@ RSpec.describe "Admin/applications show Page" do
       ApplicationPet.create!(application: @app_1, pet: @pet_4)
     end
 
-    it "user story 12 / approving a pet for adoption" do
+    it "user story 12 / approving a pet for a single application" do
       visit "/admin/applications/#{@app_1.id}"
 
       within "#pet_block-#{@pet_1.id}" do
-        expect(page).to have_button("Approve")
-        click_button "Approve"
+        expect(page).to have_button("Approve this Pet")
+        click_button "Approve this Pet"
       end
       
       expect(current_path).to eq("/admin/applications/#{@app_1.id}")
       
       within "#pet_block-#{@pet_1.id}" do
-        expect(page).to_not have_button("Approve", visible: :hidden)
-        expect(page).to have_content("Pet has been Approved")
+        expect(page).to_not have_button("Approve this Pet", visible: :hidden)
+        expect(page).to have_content("Pet has been Approved for this Application")
       end
     end
 
-    it "user story 13 / rejecting a pet for adoption" do
+    it "user story 13 / rejecting a pet for a single application" do
       visit "/admin/applications/#{@app_1.id}"
 
       within "#pet_block-#{@pet_1.id}" do
-        expect(page).to have_button("Reject")
-        click_button "Reject"
+        expect(page).to have_button("Deny this Pet")
+        click_button "Deny this Pet"
       end
 
       expect(current_path).to eq("/admin/applications/#{@app_1.id}")
       
       within "#pet_block-#{@pet_1.id}" do
-        expect(page).to_not have_button("Reject", visible: :hidden)
-        expect(page).to have_content("Pet has not been Approved")
+        expect(page).to_not have_button("Deny this Pet", visible: :hidden)
+        expect(page).to have_content("Pet has been Denied for this Application")
       end
     end 
   end 
