@@ -19,4 +19,9 @@ class Pet < ApplicationRecord
   #   where("name ILIKE ?", "%#{pet_name}%")
   # end
 
+  def app_pet_status(app_id)
+    # require 'pry'; binding.pry
+    application_pets.where(application_id: app_id).pluck(:pet_status).first
+  end
+
 end
