@@ -35,7 +35,7 @@ RSpec.describe "Admin/applications show Page" do
       
       within "#pet_block-#{@pet_1.id}" do
         expect(page).to_not have_button("Approve this Pet", visible: :hidden)
-        expect(page).to have_content("Pet has been Approved for this Application")
+        expect(page).to have_content("#{@pet_1.name} has been Approved for this Application")
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe "Admin/applications show Page" do
       
       within "#pet_block-#{@pet_1.id}" do
         expect(page).to_not have_button("Deny this Pet", visible: :hidden)
-        expect(page).to have_content("Pet has been Denied for this Application")
+        expect(page).to have_content("#{@pet_1.name} has been Denied for this Application")
       end
     end 
 
