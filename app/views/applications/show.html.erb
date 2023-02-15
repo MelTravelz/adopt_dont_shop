@@ -3,11 +3,9 @@
 <%= render partial: "shared/applicant_info" %>
 <br>
 
-<p> Pet Name: 
-<% @pets.each do |pet| %>
+<p> Pet Name: <% @pets.each do |pet| %>
   <%= link_to pet.name, "/pets/#{pet.id}" %>                      
-<%end%>
-</p>
+<%end%></p>
 <br>
 
 <% if @application.status == "In Progress" %>

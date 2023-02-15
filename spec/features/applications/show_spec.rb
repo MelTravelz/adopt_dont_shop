@@ -13,7 +13,7 @@ RSpec.describe "Applications" do
     end
 
     describe "user story 1 / as a user " do
-      it " I see the applicant name, full adress, description, name of all pet( pet name is link to show page), application status" do
+      it " I see the applicant name, full adress, description, name of all pets, application status" do
         visit "/applications/#{@app_1.id}"
         
         expect(page).to have_content("Status: #{@app_1.status}")
@@ -23,20 +23,23 @@ RSpec.describe "Applications" do
         expect(page).to have_content("Pet Name: #{@app_1.pets.first.name}")
       end
 
-      it " I see pet name that are links to their show page" do 
+      it "and I see all pet names are links to their show page" do 
         visit "/applications/#{@app_1.id}"
 
         expect(page).to have_link("#{@app_1.pets.first.name}", href: "/pets/#{@pet_1.id}")
+
         click_link("#{@pet_1.name}")
+
         expect(current_path).to eq("/pets/#{@pet_1.id}")
       end
     end
 
     describe "user story 4 / as a user " do
-      it " I see a section on the page to Add a Pet to this Application and display pet name " do
+      it "I see a section on the page to Add a Pet to this Application, I search for pet name, and it displays that pet name" do
         visit "/applications/#{@app_1.id}"
         
         expect(page).to have_content("Add a Pet to this Application")
+        expect(page).to have_field(:find_pet)
         
         fill_in("Search by pet name:", with: "Max")
         click_button("Search")
@@ -60,7 +63,6 @@ RSpec.describe "Applications" do
 
         expect(current_path).to eq("/applications/#{@app_1.id}")
         expect(page).to have_content("Pet Name: Max")
-
       end 
     end
 

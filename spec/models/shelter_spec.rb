@@ -4,6 +4,7 @@ RSpec.describe Shelter, type: :model do
   describe 'relationships' do
     it { should have_many(:pets) }
     it { should have_many(:application_pets).through(:pets) }
+    it { should have_many(:applications).through(:application_pets) }
   end
 
   describe 'validations' do
@@ -25,6 +26,7 @@ RSpec.describe Shelter, type: :model do
   end
 
   describe 'class methods' do
+    #This method is located in application_record.rb
     describe '::search' do
       it 'returns partial matches' do
         expect(Shelter.search("Fancy")).to eq([@shelter_3])
@@ -46,15 +48,24 @@ RSpec.describe Shelter, type: :model do
     describe 'user story 10 / ::reverse_alpha' do
       it 'order the shelter names in reverse alphabetical order' do
         expect(Shelter.reverse_alpha).to eq([@shelter_2, @shelter_3, @shelter_1])
+        
+        shelter_4 = Shelter.create(name: 'Ze Best Petz', city: 'Buena Vista, CO', foster_program: true, rank: 10)
+
+        expect(Shelter.reverse_alpha).to eq([shelter_4, @shelter_2, @shelter_3, @shelter_1])
       end
     end
 
     describe 'user story 11 / ::shelter_names_by_pending_apps' do
       it 'returns shelter names if the shelter has pending applications' do
         app_1 = Application.create(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 1)
-        ApplicationPet.create(application: app_1, pet: @pet_1)
-  
+        ApplicationPet.create(application: app_1, pet: @pet_1)  
+        
         expect(Shelter.shelter_names_by_pending_apps).to eq(['Aurora shelter'])
+
+        app_2 = Application.create(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 1)
+        ApplicationPet.create(application: app_2, pet: @pet_3)
+
+        expect(Shelter.shelter_names_by_pending_apps).to eq(['Aurora shelter', 'Fancy pets of Colorado'])
       end
     end
   end

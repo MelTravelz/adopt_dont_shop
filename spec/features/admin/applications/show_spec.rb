@@ -79,7 +79,6 @@ RSpec.describe "Admin/applications show Page" do
         expect(page).to have_content("Applicant Name: #{@app_1.name}")
         expect(page).to have_content("Address: #{@app_1.street_address}, #{@app_1.city}, #{@app_1.state}, #{@app_1.zip}")
         expect(page).to have_content("Description: #{@app_1.description}")
-
       end
     end
   end 

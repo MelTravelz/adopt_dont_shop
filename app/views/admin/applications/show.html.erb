@@ -5,18 +5,15 @@
 
 <% @pets.each do |pet| %>
   <div id = "pet_block-<%= pet.id %>"> 
-
-  <% if pet.app_pet_status(@application.id) == "Waiting" %>
-  <p><%= pet.name %><%= button_to  "Approve this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, approved: "yea"} %>  
-  <br>
-  <%= button_to  "Deny this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id} %></p>
-  <br> 
-
-  <% elsif pet.app_pet_status(@application.id) == "Approved" %> 
-  <p><%= pet.name %> has been Approved for this Application</p> 
-
-  <% else  pet.app_pet_status(@application.id) == "Denied" %>
-  <p><%= pet.name %> has been Denied for this Application</p>
-  <% end %>
+    <% if pet.app_pet_status(@application.id) == "Waiting" %>
+      <p><%= pet.name %><%= button_to  "Approve this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, approved: "yea"} %>  
+      <br>
+      <%= button_to  "Deny this Pet", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id} %></p>
+      <br> 
+    <% elsif pet.app_pet_status(@application.id) == "Approved" %> 
+      <p><%= pet.name %> has been Approved for this Application</p> 
+    <% else %>
+      <p><%= pet.name %> has been Denied for this Application</p>
+    <% end %>
   </div>
 <% end %>

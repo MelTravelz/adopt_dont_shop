@@ -14,6 +14,7 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of :zip }
     it { should validate_numericality_of :zip }
     it { should validate_presence_of :description }
+    # This was unable to be validated... but why? 
     # it { should validate_length_of(:zip).is_equal_to(5) }
   end
 
