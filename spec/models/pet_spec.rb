@@ -33,6 +33,7 @@ RSpec.describe Pet, type: :model do
       end
     end
 
+    # All models inherit this type of method, see: application_record.rb
     # describe "user story 4" do
     #   describe "::find_pet" do
     #     it "can find pet name matching user input" do
@@ -50,12 +51,17 @@ RSpec.describe Pet, type: :model do
       end
     end
 
-    describe '#app_pet_status(app_id)' do
-      it "returns status of pet_status=1 for a specific application_pet record" do
+    describe 'user story 12 / #app_pet_status(app_id)' do
+      it "returns status of 'pet_status' for a specific application_pet record" do
         app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog")
-        app_pet = ApplicationPet.create!(application: app_1, pet: @pet_2, pet_status: 2)
+        app_pet = ApplicationPet.create!(application: app_1, pet: @pet_2, pet_status: 0)
+
+        expect(@pet_2.app_pet_status(app_1.id)).to eq("Waiting")
+
+        app_pet.update!(pet_status: 2)
 
         expect(@pet_2.app_pet_status(app_1.id)).to eq("Denied")
+        expect(@pet_2.app_pet_status(app_1.id)).to_not eq("Waiting")
       end
     end
   end

@@ -14,14 +14,11 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of :zip }
     it { should validate_numericality_of :zip }
     it { should validate_presence_of :description }
+    # This was unable to be validated... but why? 
+    # it { should validate_length_of(:zip).is_equal_to(5) }
   end
 
   before(:each) do
-    # @shelter_1 = Shelter.create(name: 'Petz R Us', city: 'Denver, CO', foster_program: false, rank: 9)
-    # @pet_1 = @shelter_1.pets.create!(name: 'Max', breed: 'goldendoodle', age: 2, adoptable: true)
-    # @pet_2 = @shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
-    # @pet_3 = @shelter_1.pets.create!(name: 'Pamuk', breed: 'english springer spaniel', age: 3, adoptable: false)
-
     @app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 0)
   end
 

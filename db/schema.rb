@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2023_02_10_223436) do
     t.string "street_address"
     t.string "city"
     t.string "state"
-    t.bigint "zip"
+    t.integer "zip", default: 5
     t.string "description"
     t.integer "status", default: 0
     t.datetime "created_at", null: false

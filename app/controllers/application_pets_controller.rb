@@ -6,6 +6,7 @@ class ApplicationPetsController < ApplicationController
   end
 
   private 
+  
   def applicaton_pets_params
     params.permit(:application_id, :pet_id)
   end

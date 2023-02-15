@@ -7,6 +7,8 @@ class Application < ApplicationRecord
   validates_presence_of :city, presence: true
   validates_presence_of :state, presence: true
   validates :zip, presence: true, numericality: true
+  # This was unable to be validated... but why? 
+  # validates_length_of :zip, is: 5
   validates_presence_of :description, presence: true
 
   enum status: ["In Progress", "Pending", "Accepted", "Rejected"]

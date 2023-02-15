@@ -5,7 +5,7 @@ class CreateApplications < ActiveRecord::Migration[5.2]
       t.string :street_address
       t.string :city
       t.string :state
-      t.integer :zip, limit: 5
+      t.integer :zip, default: 5
       t.string :description
       t.integer :status, default: 0
       t.timestamps

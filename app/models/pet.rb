@@ -6,7 +6,6 @@ class Pet < ApplicationRecord
   validates :name, presence: true
   validates :age, presence: true, numericality: true
 
-
   def shelter_name
     shelter.name
   end
@@ -15,12 +14,12 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
+  # All models inherit this type of method, see: application_record.rb
   # def self.find_pet(pet_name)
   #   where("name ILIKE ?", "%#{pet_name}%")
   # end
 
   def app_pet_status(app_id)
-    # require 'pry'; binding.pry
     application_pets.where(application_id: app_id).pluck(:pet_status).first
   end
 
