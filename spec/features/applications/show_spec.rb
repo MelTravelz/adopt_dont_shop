@@ -16,11 +16,11 @@ RSpec.describe "Applications" do
       it " I see the applicant name, full adress, description, name of all pet( pet name is link to show page), application status" do
         visit "/applications/#{@app_1.id}"
         
+        expect(page).to have_content("Status: #{@app_1.status}")
         expect(page).to have_content("Applicant Name: #{@app_1.name}")
         expect(page).to have_content("Address: #{@app_1.street_address}, #{@app_1.city}, #{@app_1.state}, #{@app_1.zip}")
         expect(page).to have_content("Description: #{@app_1.description}")
         expect(page).to have_content("Pet Name: #{@app_1.pets.first.name}")
-        expect(page).to have_content("Status: #{@app_1.status}")
       end
 
       it " I see pet name that are links to their show page" do 
