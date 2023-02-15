@@ -14,9 +14,13 @@ RSpec.describe "Admin/applications show Page" do
       @pet_4 = Pet.create!(name: 'Maxamus', breed: 'mini-goldendoodle', age: 1, adoptable: true, shelter_id: @shelter_3.id)
 
       @app_1 = Application.create!(name: "Joe Shmow", street_address: "123 Main St", city: "Boston", state: "MA", zip: 12346, description: "I want a dog", status: 1)
-
+      @app_2 = Application.create!(name: "Joe the other Shmow", street_address: "121 Main St", city: "Boston", state: "MA", zip: 12346, description: "I also want dog", status: 1)
+      
       ApplicationPet.create!(application: @app_1, pet: @pet_1)
       ApplicationPet.create!(application: @app_1, pet: @pet_4)
+
+      ApplicationPet.create!(application: @app_2, pet: @pet_2)
+      ApplicationPet.create!(application: @app_2, pet: @pet_4)
     end
 
     it "user story 12 / approving a pet for a single application" do
@@ -48,6 +52,22 @@ RSpec.describe "Admin/applications show Page" do
       within "#pet_block-#{@pet_1.id}" do
         expect(page).to_not have_button("Deny this Pet", visible: :hidden)
         expect(page).to have_content("Pet has been Denied for this Application")
+      end
+    end 
+
+    it "user story 14 / Button varification for two app show pages " do
+      visit "/admin/applications/#{@app_1.id}"
+
+      within "#pet_block-#{@pet_4.id}" do
+        expect(page).to have_button("Deny this Pet")
+        click_button "Deny this Pet"
+      end
+
+      visit "/admin/applications/#{@app_2.id}"
+      
+      within "#pet_block-#{@pet_4.id}" do
+        expect(page).to have_button("Deny this Pet")
+        expect(page).to have_button("Approve this Pet")
       end
     end 
   end 
